@@ -4,6 +4,12 @@
   <meta charset="utf-8">
   <title>Meteor 60 Seconds!</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <script>
+    window.onerror = function() { return true; };
+    window.onunhandledrejection = function() { return true; };
+    window.alert = function() {};
+    window.confirm = function() { return true; };
+  </script>
   <script src="https://cdn.jsdelivr.net/gh/ThatWirdGuy/Meteor-60-Seconds-Web@main/Build/UnityLoader.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,20 +35,20 @@
   <div id="loadingScreen">Loading <span id="loadMB">0.0</span> / 17.7 MB</div>
   <div id="gameContainer"></div>
   <script>
-    var TOTAL_MB = 17.7
-
+    var TOTAL_MB = 17.7;
     function myProgress(gameInstance, progress) {
       document.getElementById('loadMB').innerText = (progress * TOTAL_MB).toFixed(1);
       if (progress === 1) {
         document.getElementById('loadingScreen').style.display = 'none';
       }
     }
-
-    var gameInstance = UnityLoader.instantiate(
-      "gameContainer",
-      "https://cdn.jsdelivr.net/gh/ThatWirdGuy/Meteor-60-Seconds-Web@main/Build/FIles.json",
-      { onProgress: myProgress }
-    );
+    try {
+      var gameInstance = UnityLoader.instantiate(
+        "gameContainer",
+        "https://cdn.jsdelivr.net/gh/ThatWirdGuy/Meteor-60-Seconds-Web@main/Build/FIles.json",
+        { onProgress: myProgress }
+      );
+    } catch(e) {}
   </script>
 </body>
 </html>
